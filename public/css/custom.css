@@ -1,0 +1,32 @@
+:root {
+    --primary-blue: #2a91ff;
+    --secondary-blue: #64afff;
+    }
+
+.btn, 
+.btn-close,
+.btn-submit {
+    background-color: hsl(210, 17%, 98%);
+    color: #343a40;
+    border: 1px solid #343a40;
+    border-radius: 7px;
+    padding: 1px 4px 2px 4px;
+    transition: 100ms linear;
+}
+
+.btn:hover {
+    background-color: #343a40;
+    color: hsl(210, 17%, 98%);
+}
+
+.btn-close:hover {
+    background-color: #ff8080;
+}
+
+.btn-submit:hover {
+    background-color: rgb(164, 255, 164);
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
