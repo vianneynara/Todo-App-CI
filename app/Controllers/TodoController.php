@@ -6,7 +6,12 @@ class TodoController extends BaseController
 {
     public function index(): string
     {
-        return view('todos_page');
+        $model = new \App\Models\TodoModel();
+        $data = [
+            'todos' => $model->getTodos()
+        ];
+
+        return view('todos_page', $data);
     }
 
     public function getTodos()
@@ -22,47 +27,68 @@ class TodoController extends BaseController
         $todos = new \App\Models\TodoModel();
         $res = $todos->createTodo($title);
 
-        $message = $res ? 'Todo created successfully' : 'Failed to create todo';
-        return $this->response->setJSON(['message' => $message]);
+        $statusCode = $res ? 200 : 400;
+        return $this->response->setJSON([
+            'status' => $statusCode,
+            'message' => $res ? 'Todo created successfully' : 'Failed to create todo'
+        ]);
     }
 
-    public function delete($id)
+    public function delete()
     {
         $todos = new \App\Models\TodoModel();
+        $id = $this->request->getUri()->getSegment(2);
         $res = $todos->deleteTodo($id);
 
-        $message = $res ? 'Todo deleted successfully' : 'Failed to delete todo';
-        return $this->response->setJSON(['message' => $message]);
+        $statusCode = $res ? 200 : 400;
+        return $this->response->setJSON([
+            'status' => $statusCode,
+            'message' => $res ? 'Todo deleted successfully' : 'Failed to delete todo'
+        ]);
     }
 
-    public function editTitle($id)
+    public function editTitle()
     {
         $title = $this->request->getPost('title');
         $todos = new \App\Models\TodoModel();
+        $id = $this->request->getUri()->getSegment(2);
         $res = $todos->editTitleById($id, $title);
 
-        $message = $res ? 'Todo title updated successfully' : 'Failed to update todo title';
-        return $this->response->setJSON(['message' => $message]);
+        $statusCode = $res ? 200 : 400;
+        return $this->response->setJSON([
+            'status' => $statusCode,
+            'message' => $res ? 'Todo title updated successfully' : 'Failed to update todo title'
+        ]);
     }
 
+    /**
+     * Currently unused.
+     */
     public function editStatus($id)
     {
         $isDone = $this->request->getPost('isDone');
         $todos = new \App\Models\TodoModel();
         $res = $todos->editStatusById($id, $isDone);
 
-        $message = $res ? 'Todo status updated successfully' : 'Failed to update todo status';
-        return $this->response->setJSON(['message' => $message]);
+        $statusCode = $res ? 200 : 400;
+        return $this->response->setJSON([
+            'status' => $statusCode,
+            'message' => $res ? 'Todo status updated successfully' : 'Failed to update todo status'
+        ]);
     }
 
-    public function toggleStatus($id)
+    public function toggleStatus()
     {
         $todos = new \App\Models\TodoModel();
+        $id = $this->request->getUri()->getSegment(2);
         $todo = $todos->find($id);
         $isDone = $todo['isDone'] == 0 ? 1 : 0;
         $res = $todos->editStatusById($id, $isDone);
 
-        $message = $res ? 'Todo status updated successfully' : 'Failed to update todo status';
-        return $this->response->setJSON(['message' => $message]);
+        $statusCode = $res ? 200 : 400;
+        return $this->response->setJSON([
+            'status' => $statusCode,
+            'message' => $res ? 'Todo status updated successfully' : 'Failed to update todo status'
+        ]);
     }
 }
