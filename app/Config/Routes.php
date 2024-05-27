@@ -18,13 +18,13 @@ $routes->get('/todos','TodoController::getTodos');
 $routes->post('/todos', 'TodoController::create');
 
 // Route to DELETE /todos/{id} to delete a todo
-$routes->delete('/todos/(:num)', 'TodoController::delete');
+$routes->post('/todos/(:num)/delete', 'TodoController::delete');
 
 // Route to PUT /todos/{id}/title to edit a todo's title
-$routes->put('/todos/(:num)/title', 'TodoController::editTitle');
+$routes->post('/todos/(:num)/title', 'TodoController::editTitle');
 
 // (currently unused) Route to PUT /todos/{id}/status to edit a todo's status
-$routes->put('/todos/(:num)/status', 'TodoController::editStatus');
+$routes->post('/todos/(:num)/status', 'TodoController::editStatus');
 
 // Route to PUT /todos/{id}/toggle-status to toggle a todo's status
-$routes->put('/todos/(:num)/toggle-status', 'TodoController::toggleStatus');
+$routes->post('/todos/(:num)/toggle-status', 'TodoController::toggleStatus');
