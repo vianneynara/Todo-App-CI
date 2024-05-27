@@ -3,6 +3,15 @@
     --secondary-blue: #64afff;
 }
 
+th, td {
+    padding-left: 5px;
+    margin-bottom: 3px;
+}
+
+td>a {
+    margin: 0 2px;
+}
+
 .btn,
 .btn-close,
 .btn-submit {

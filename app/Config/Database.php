@@ -197,5 +197,11 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
+
+        // Load the database config username, password, and database from the .env file
+        $this->default['username'] = $_ENV['database.default.username'];
+        $this->default['password'] = $_ENV['database.default.password'];
+        $this->default['database'] = $_ENV['database.default.database'];
+        $this->default['port'] = (int) $_ENV['database.default.port'];
     }
 }
