@@ -64,7 +64,7 @@
               <tr id="todo-item-<?= $currTodoId ?>" class="odd:bg-gray-300 even:bg-gray-200">
                 <td style="font-weight:bold"><?= $currTodoId ?></td>
                 <td>
-                  <input type="text" id="todo-<?= $currTodoId ?>-title" value="<?= $todo['title'] ?>" class="w-full px-2 rounded" disabled>
+                  <input type="text" id="todo-<?= $currTodoId ?>-title" value="<?= $todo['title'] ?>" style="height:28px;" class="w-full px-2 rounded" disabled>
                 </td>
                 <td class="flex justify-between">
                 <td class="flex justify-between gap-1">
@@ -149,7 +149,7 @@
 
   // THIS IS TO HANDLE FORM SUBMISSIONS VIA AJAX
   window.addEventListener('DOMContentLoaded', function() {
-    const todoForms = document.querySelectorAll('form[action^="/todos/"]');
+    const todoForms = document.querySelectorAll('form[action^="/todos"]');
     todoForms.forEach(form => {
       form.addEventListener('submit', function(event) {
         event.preventDefault();
