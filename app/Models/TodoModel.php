@@ -20,7 +20,7 @@ class TodoModel extends Model
 
     public function getTodos()
     {
-        return $this->all();
+        return $this->findAll();
     }
 
     public function createTodo($title)
@@ -34,13 +34,13 @@ class TodoModel extends Model
 
     public function deleteTodo($id)
     {
-        return $this->where('id', $id)->delete();
+        return $this->where('todo_id', $id)->delete();
     }
 
     public function editTitleById($id, $title)
     {
         try {
-            $this->where('id', $id)->set('title', $title)->update();
+            $this->where('todo_id', $id)->set('title', $title)->update();
             return true;
         } catch (\Exception $e) {
             return false;
@@ -49,7 +49,7 @@ class TodoModel extends Model
 
     public function editStatusById($id, $isDone) {
         try {
-            $this->where('id', $id)->set('isDone', $isDone)->update();
+            $this->where('todo_id', $id)->set('isDone', $isDone)->update();
             return true;
         } catch (\Exception $e) {
             return false;
@@ -61,9 +61,9 @@ class TodoModel extends Model
         try {
             $todo = $this->find($id);
             if ($todo['isDone'] == 'done') {
-                $this->where('id', $id)->set('isDone', '1')->update();
+                $this->where('todo_id', $id)->set('isDone', '1')->update();
             } else {
-                $this->where('id', $id)->set('isDone', '0')->update();
+                $this->where('todo_id', $id)->set('isDone', '0')->update();
             }
             return true;
         } catch (\Exception $e) {
