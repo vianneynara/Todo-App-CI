@@ -12,17 +12,20 @@ class TodoSeeder extends Seeder
             [
                 'todo_id' => 1,
                 'title' => 'Learn CodeIgniter 4',
-                'isDone' => 0
+                'isDone' => 0,
+                'user_id' => '1'
             ],
             [
                 'todo_id' => 2,
                 'title' => 'Build a Todo App',
-                'isDone' => 0
+                'isDone' => 0,
+                'user_id' => '1'
             ],
             [
                 'todo_id' => 3,
                 'title' => 'Create Auth',
-                'isDone' => 0
+                'isDone' => 0,
+                'user_id' => '1'
             ]
         ];
 
