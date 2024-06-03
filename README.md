@@ -11,23 +11,23 @@ Simple project to implement CI (Code Igniter) framework in PHP.
 
 ### Main features
 
-![Legin Page](docs\images\login-page.png)
+![Legin Page](docs/images/login-page.png)
 
-![Register Page](docs\images\register-page.png)
+![Register Page](docs/images/register-page.png)
 
-![Todos Page](docs\images\todos-page.png)
+![Todos Page](docs/images/todos-page.png)
 
-![Creating new todo](docs\images\creating-new-todo.png)
+![Creating new todo](docs/images/creating-new-todo.png)
 
-![Editing existing todo's title](docs\images\edit-todo-title.png)
+![Editing existing todo's title](docs/images/edit-todo-title.png)
 
-![Toggle done](docs\images\toggle-todo-status.png)
+![Toggle done](docs/images/toggle-todo-status.png)
 
 ### Different user
 
 (example: Emilia)
 
-![Todos Page (Emilia)](docs\images\todos-page-emilia.png)
+![Todos Page (Emilia)](docs/images/todos-page-emilia.png)
 
 ## Installation
 
