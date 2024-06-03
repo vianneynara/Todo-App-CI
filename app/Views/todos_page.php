@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION['user_id'])) {
+  echo "<script>alert('Please login first')</script>";
+  header("refresh:5;url=/login-page");
+  exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,13 +19,10 @@
 </head>
 
 <body>
-  <!-- display scren width and height -->
-  <div id="dimensions" class="fixed right-0 bg-green-200"></div>
-
   <div class="bg-gray-100 mx-auto w-[500px] p-2 h-screen flex flex-col">
     <header class="bg-gray-200 mb-2 p-2 rounded">
       <nav class="flex justify-between items-center">
-        <a href="/" class="btn flex">
+        <a href="/logout" class="btn flex">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
           </svg>
@@ -32,7 +37,7 @@
     <main class="bg-gray-200 flex-grow mb-10 p-2 rounded">
       <div class="wrap text-center">
         <div class="flex justify-between mb-2">
-          <span class="font-bold">List of Todos</span>
+          <span class="font-bold">List of Todos (<?= $_SESSION["username"] ?>)</span>
           <a class="btn" href="/todos-page">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -100,7 +105,7 @@
     </div>
     <form action="/todos" method="POST">
       <?= csrf_field() ?>
-      <input type="text" name="title" placeholder="Enter todo title" class="w-full p-2 mb-2 rounded border-solid border-2 border-black">
+      <input type="text" name="title" placeholder="Enter todo title" class="w-full p-2 mb-2 rounded border-solid border-2 border-black" required>
       <div class="flex justify-between gap-1">
         <button type="button" class="btn-close w-16" onclick="document.getElementById('new-todo-dialog').close()">Close</button>
         <button type="submit" class="btn-submit flex-grow">Create</button>
@@ -125,9 +130,6 @@
 </body>
 
 <script>
-  window.onresize = displayWindowSize;
-  window.onload = displayWindowSize;
-
   // listener to close dialog when clicked outside the dialog bounds
   document.querySelectorAll('dialog').forEach(dialog => {
     dialog.addEventListener('click', function(e) {
@@ -163,12 +165,15 @@
           })
           .then(response => response.json()) // Parse JSON response
           .then(data => {
-            if (data.status === 200) { // Handle successful response
+            // Handle successful response
+            if (data.status === 200) { 
               window.location.reload();
-            } else if (data.status === 400) { // Handle error response
+            } 
+            // Handle error response
+            else if (data.status === 400) { 
               alert('An error occurred: ' + data.message);
-            } else { // Log error
-              console.error('Unexpected response status:', data.status); 
+            } else { 
+              console.error('What the fuck:', data.status);
             }
           })
           .catch(error => { // Handle network errors
@@ -185,10 +190,6 @@
     document.querySelector('#edit-todo-dialog input[name="title"]').value = oldTitle;
     document.getElementById('edit-todo-dialog').showModal();
   }
-
-  function displayWindowSize() {
-    document.getElementById("dimensions").innerHTML = `<span style="font-weight:bold">${window.innerWidth}</span>x<span style="font-weight:bold">${window.innerHeight}</span>`;
-  };
 
   function openCreateTodoDialog() {
     document.getElementById('new-todo-dialog').showModal();
