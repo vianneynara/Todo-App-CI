@@ -7,6 +7,20 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'HomeController::index');
 
+// Route to GET the login page
+$routes->get('/login-page', 'AuthController::loginPage');
+
+// Route to POST /login to login
+$routes->post('/login', 'AuthController::login');
+
+// Route to GET register page
+$routes->get('/register-page', 'AuthController::registerPage');
+
+// Route to POST /register to register
+$routes->post('/register', 'AuthController::register');
+
+// Route to logout
+$routes->get('/logout', 'AuthController::logout');
 
 // Routes to the todo list page
 $routes->get('/todos-page', 'TodoController::index');
@@ -22,9 +36,6 @@ $routes->post('/todos/(:num)/delete', 'TodoController::delete');
 
 // Route to PUT /todos/{id}/title to edit a todo's title
 $routes->post('/todos/(:num)/title', 'TodoController::editTitle');
-
-// (currently unused) Route to PUT /todos/{id}/status to edit a todo's status
-$routes->post('/todos/(:num)/status', 'TodoController::editStatus');
 
 // Route to PUT /todos/{id}/toggle-status to toggle a todo's status
 $routes->post('/todos/(:num)/toggle-status', 'TodoController::toggleStatus');

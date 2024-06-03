@@ -14,7 +14,8 @@ class TodoModel extends Model
     {
         $this->allowedFields = [
             "title",
-            "isDone"
+            "isDone",
+            "user_id"
         ];
     }
 
@@ -23,11 +24,17 @@ class TodoModel extends Model
         return $this->findAll();
     }
 
-    public function createTodo($title)
+    public function getTodosByUserId($userId)
+    {
+        return $this->where('user_id', $userId)->findAll();
+    }
+
+    public function createTodo($sessionId, $title)
     {
         $data = [
             'title' => $title,
-            'isDone' => 0
+            'isDone' => 0,
+            'user_id' => $sessionId
         ];
         return $this->insert($data);
     }
