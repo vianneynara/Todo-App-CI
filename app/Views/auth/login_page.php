@@ -17,7 +17,7 @@
                 <a href="/register-page" class="btn h-fit" style="width:100px">Register</a>
             </div>
             <div class="flex justify-center my-8">
-                <form action="/register" method="post">
+                <form action="/login" method="post">
                     <?= csrf_field() ?>
                     <table>
                         <tr>
